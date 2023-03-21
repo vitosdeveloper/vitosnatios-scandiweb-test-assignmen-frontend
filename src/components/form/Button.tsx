@@ -21,4 +21,4 @@ const Button = ({ children, onClick, disabled }: Props) => {
   );
 };
 
-export default Button;
+export default memo(Button);

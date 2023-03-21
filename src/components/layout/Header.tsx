@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import Button from '../form/Button';
 import Title from '../text/Title';
 import styles from './Header.module.sass';
@@ -40,4 +39,4 @@ const Header = ({
   );
 };
 
-export default memo(Header);
+export default Header;

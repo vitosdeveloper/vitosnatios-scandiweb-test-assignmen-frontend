@@ -1,7 +1,9 @@
 import React, {
   createContext,
   Dispatch,
+  memo,
   SetStateAction,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -40,25 +42,26 @@ const GlobalProvider = ({ children }: Props) => {
 
   const { VITE_SERVER_ROOT_URL } = import.meta.env;
 
+  const getProducts = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const res = await fetch(VITE_SERVER_ROOT_URL + '/get/getProducts.php');
+      const json = await res.json();
+      const data = json.map((item: IProduct) => ({
+        ...item,
+        id: Number(item.id),
+        price: Number(item.price),
+      }));
+      setProducts(data);
+    } catch (error: any) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const res = await fetch(VITE_SERVER_ROOT_URL + '/get/getProducts.php');
-        const json = await res.json();
-        const data = json.map((item: IProduct) => ({
-          ...item,
-          id: Number(item.id),
-          price: Number(item.price),
-        }));
-        setProducts(data);
-      } catch (error: any) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
     getProducts();
   }, []);
 

@@ -1,15 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../../context/GlobalContext';
+import useTitle from '../../utils/useTitle';
 import Products from '../content/Products';
-import Footer from '../layout/Footer';
 import Header from '../layout/Header';
 import Error from '../shared/Error';
 import Loading from '../shared/Loading';
 
-type Props = {};
-
-const ProductList = (props: Props) => {
+const ProductList = () => {
   const navigate = useNavigate();
   const {
     loading,
@@ -21,8 +19,16 @@ const ProductList = (props: Props) => {
     VITE_SERVER_ROOT_URL,
   } = useGlobalContext();
 
-  const btn1func = () => navigate('/add-product');
-  const btn2func = async () => {
+  const btn1func = useCallback(() => {
+    navigate('/add-product');
+    setMassDelete([]);
+  }, [navigate]);
+
+  useEffect(() => {
+    useTitle('Product List');
+  }, []);
+
+  const btn2func = useCallback(async () => {
     try {
       const res = await fetch(
         VITE_SERVER_ROOT_URL + '/delete/removeProductById.php',
@@ -43,7 +49,7 @@ const ProductList = (props: Props) => {
     } catch (error: any) {
       console.log(error.message);
     }
-  };
+  }, [massDelete, VITE_SERVER_ROOT_URL]);
 
   return (
     <>
@@ -58,7 +64,6 @@ const ProductList = (props: Props) => {
       {loading && <Loading />}
       {error && <Error>{error}</Error>}
       {products.length && <Products />}
-      <Footer />
     </>
   );
 };

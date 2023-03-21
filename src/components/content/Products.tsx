@@ -1,13 +1,13 @@
-import { memo, useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useGlobalContext } from '../../context/GlobalContext';
 import Product from './Product';
 import styles from './Products.module.sass';
 
 const Products = () => {
-  const { products, setMassDelete, massDelete } = useGlobalContext();
+  const { products, setMassDelete } = useGlobalContext();
 
   const addToRemoveList = useCallback((id: number) => {
-    if (!massDelete.includes(id)) setMassDelete((prev) => [...prev, id]);
+    setMassDelete((prev) => [...prev, id]);
   }, []);
   const removeFromRemoveList = useCallback((id: number) => {
     setMassDelete((prev) => prev.filter((prevId) => prevId !== id));
@@ -27,4 +27,4 @@ const Products = () => {
   );
 };
 
-export default memo(Products);
+export default Products;

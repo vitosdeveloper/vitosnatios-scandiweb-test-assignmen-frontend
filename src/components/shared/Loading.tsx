@@ -1,4 +1,3 @@
-import React, { memo } from 'react';
 import { BeatLoader } from 'react-spinners';
 
 type Props = {};

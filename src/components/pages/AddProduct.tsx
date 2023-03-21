@@ -1,16 +1,17 @@
-import { memo, useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../layout/Footer';
+import useTitle from '../../utils/useTitle';
 import Header from '../layout/Header';
 
-type Props = {};
-
-const AddProduct = (props: Props) => {
+const AddProduct = () => {
   const navigate = useNavigate();
   const btn1func = useCallback(() => {}, []);
   //  reset form state when cancelin
   const btn2func = useCallback(() => navigate('/'), []);
 
+  useEffect(() => {
+    useTitle('Product Add');
+  }, []);
   return (
     <>
       <Header
@@ -20,9 +21,8 @@ const AddProduct = (props: Props) => {
         btn1func={btn1func}
         btn2func={btn2func}
       />
-      <Footer />
     </>
   );
 };
 
-export default memo(AddProduct);
+export default AddProduct;

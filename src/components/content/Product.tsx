@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { IProduct } from '../../types/product';
 import priceFormatter from '../../utils/priceFormatter';
 import styles from './Product.module.sass';
@@ -12,7 +12,7 @@ type Props = {
 const Product = ({ product, addToRemoveList, removeFromRemoveList }: Props) => {
   const { id, sku, name, price, productType, attribute } = product;
 
-  const measureType = () => {
+  const measureType = useCallback(() => {
     if (productType === 'dvd') {
       return 'Size: ';
     } else if (productType === 'book') {
@@ -20,15 +20,18 @@ const Product = ({ product, addToRemoveList, removeFromRemoveList }: Props) => {
     } else if (productType === 'furniture') {
       return 'Weight: ';
     }
-  };
+  }, [productType]);
 
-  const handleCheckboxChange = ({ target }: any) => {
-    if (target.checked) {
-      addToRemoveList(id);
-    } else {
-      removeFromRemoveList(id);
-    }
-  };
+  const handleCheckboxChange = useCallback(
+    ({ target }: any) => {
+      if (target.checked) {
+        addToRemoveList(id);
+      } else {
+        removeFromRemoveList(id);
+      }
+    },
+    [id]
+  );
 
   return (
     <label htmlFor={String(id)} className={styles.product}>
