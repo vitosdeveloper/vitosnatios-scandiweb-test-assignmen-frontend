@@ -1,29 +1,41 @@
 import React, {
   createContext,
   Dispatch,
-  memo,
   SetStateAction,
-  useCallback,
   useContext,
   useEffect,
   useState,
 } from 'react';
-import { IProduct } from '../types/product';
+import { NewProduct, IProduct } from '../types/product';
 
 const GlobalContext = createContext<{
   products: IProduct[];
   setProducts: Dispatch<SetStateAction<IProduct[]>>;
   error: string | null;
+  setError: Dispatch<SetStateAction<string | null>>;
   massDelete: number[];
   setMassDelete: Dispatch<SetStateAction<number[]>>;
   VITE_SERVER_ROOT_URL: string;
+  newProduct: NewProduct;
+  setNewProduct: Dispatch<SetStateAction<NewProduct>>;
+  getProducts: () => void;
 }>({
   products: [],
   setProducts: () => {},
   error: null,
+  setError: () => {},
   massDelete: [],
   setMassDelete: () => {},
   VITE_SERVER_ROOT_URL: '',
+  newProduct: {
+    sku: '',
+    name: '',
+    price: 0,
+    productType: '',
+    attribute: '',
+  },
+  setNewProduct: () => {},
+  getProducts: () => {},
 });
 
 export const useGlobalContext = () => useContext(GlobalContext);
@@ -36,6 +48,13 @@ const GlobalProvider = ({ children }: Props) => {
   const [error, setError] = useState<null | string>(null);
   const [products, setProducts] = useState<IProduct[]>([]);
   const [massDelete, setMassDelete] = useState<number[]>([]);
+  const [newProduct, setNewProduct] = useState<NewProduct>({
+    sku: '',
+    name: '',
+    price: 0,
+    productType: '',
+    attribute: '',
+  });
 
   const { VITE_SERVER_ROOT_URL } = import.meta.env;
 
@@ -64,9 +83,13 @@ const GlobalProvider = ({ children }: Props) => {
         products,
         setProducts,
         error,
+        setError,
         massDelete,
         setMassDelete,
         VITE_SERVER_ROOT_URL,
+        newProduct,
+        setNewProduct,
+        getProducts,
       }}
     >
       {children}

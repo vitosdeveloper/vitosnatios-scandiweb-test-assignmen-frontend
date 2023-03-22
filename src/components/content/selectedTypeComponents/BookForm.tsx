@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import useInput from '../../../custom-hooks/useInput';
+import numberValidation from '../../../utils/NumberInputValue';
 import ProductAttributeFormContainer from '../../containers/ProductAttributeFormContainer';
 import Input from '../../form/Input';
 
@@ -11,7 +12,9 @@ const BookForm = ({ setAttributeValues }: Props) => {
   const bookInput = useInput(0);
 
   useEffect(() => {
-    setAttributeValues(String(bookInput.value) + 'KG');
+    if (numberValidation(bookInput)) {
+      setAttributeValues('');
+    } else setAttributeValues(String(Number(bookInput.value)) + 'KG');
   }, [bookInput.value]);
 
   return (

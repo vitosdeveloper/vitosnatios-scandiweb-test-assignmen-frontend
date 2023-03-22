@@ -1,4 +1,5 @@
-import { memo } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
+import Error from '../shared/Error';
 import styles from './Input.module.sass';
 
 type Props = {
@@ -6,13 +7,20 @@ type Props = {
   label: string;
   type: string;
   required?: boolean;
+  value?: string;
 };
 
 const Input = ({ id, label, type, required, ...props }: Props) => {
   return (
     <div className={styles.inputContainer}>
       <label htmlFor={id}>{label}</label>
-      <input id={id} type={type} required={required} {...props} />
+      <input
+        onError={() => console.log('lol')}
+        id={id}
+        type={type}
+        required={required}
+        {...props}
+      />
     </div>
   );
 };

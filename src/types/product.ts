@@ -6,3 +6,5 @@ export interface IProduct {
   productType: string;
   attribute: string;
 }
+
+export type NewProduct = Omit<IProduct, 'id'>;

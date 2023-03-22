@@ -1,5 +1,6 @@
-import React, { Dispatch, memo, SetStateAction, useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import useInput from '../../../custom-hooks/useInput';
+import numberValidation from '../../../utils/NumberInputValue';
 import ProductAttributeFormContainer from '../../containers/ProductAttributeFormContainer';
 import Input from '../../form/Input';
 
@@ -11,7 +12,10 @@ const DvdForm = ({ setAttributeValues }: Props) => {
   const dvdInput = useInput(0);
 
   useEffect(() => {
-    setAttributeValues(String(dvdInput.value) + ' MB');
+    // if (!dvdInput.value.length || !Number(dvdInput.value)) {
+    if (numberValidation(dvdInput)) {
+      setAttributeValues('');
+    } else setAttributeValues(String(Number(dvdInput.value)) + ' MB');
   }, [dvdInput.value]);
 
   return (

@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import useInput from '../../../custom-hooks/useInput';
+import numberValidation from '../../../utils/NumberInputValue';
 import ProductAttributeFormContainer from '../../containers/ProductAttributeFormContainer';
 import Input from '../../form/Input';
 
@@ -13,13 +14,20 @@ const FurnitureForm = ({ setAttributeValues }: Props) => {
   const lengthInput = useInput(0);
 
   useEffect(() => {
-    setAttributeValues(
-      String(heightInput.value) +
-        'x' +
-        String(widthInput.value) +
-        'x' +
-        String(lengthInput.value)
-    );
+    if (
+      numberValidation(heightInput) ||
+      numberValidation(widthInput) ||
+      numberValidation(lengthInput)
+    ) {
+      setAttributeValues('');
+    } else
+      setAttributeValues(
+        String(Number(heightInput.value)) +
+          'x' +
+          String(Number(widthInput.value)) +
+          'x' +
+          String(Number(lengthInput.value))
+      );
   }, [heightInput.value, widthInput.value, lengthInput.value]);
 
   return (
