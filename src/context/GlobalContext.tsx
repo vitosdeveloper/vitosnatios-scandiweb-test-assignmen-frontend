@@ -13,7 +13,6 @@ import { IProduct } from '../types/product';
 const GlobalContext = createContext<{
   products: IProduct[];
   setProducts: Dispatch<SetStateAction<IProduct[]>>;
-  loading: boolean;
   error: string | null;
   massDelete: number[];
   setMassDelete: Dispatch<SetStateAction<number[]>>;
@@ -21,7 +20,6 @@ const GlobalContext = createContext<{
 }>({
   products: [],
   setProducts: () => {},
-  loading: true,
   error: null,
   massDelete: [],
   setMassDelete: () => {},
@@ -35,7 +33,6 @@ type Props = {
 };
 
 const GlobalProvider = ({ children }: Props) => {
-  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | string>(null);
   const [products, setProducts] = useState<IProduct[]>([]);
   const [massDelete, setMassDelete] = useState<number[]>([]);
@@ -44,8 +41,6 @@ const GlobalProvider = ({ children }: Props) => {
 
   const getProducts = async () => {
     try {
-      setLoading(true);
-      setError(null);
       const res = await fetch(VITE_SERVER_ROOT_URL + '/get/getProducts.php');
       const json = await res.json();
       const data = json.map((item: IProduct) => ({
@@ -55,9 +50,7 @@ const GlobalProvider = ({ children }: Props) => {
       }));
       setProducts(data);
     } catch (error: any) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
+      console.log(error.message);
     }
   };
 
@@ -70,7 +63,6 @@ const GlobalProvider = ({ children }: Props) => {
       value={{
         products,
         setProducts,
-        loading,
         error,
         massDelete,
         setMassDelete,

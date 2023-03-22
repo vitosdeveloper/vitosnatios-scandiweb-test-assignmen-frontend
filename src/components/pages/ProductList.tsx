@@ -1,32 +1,20 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../../context/GlobalContext';
-import useTitle from '../../utils/useTitle';
+import useTitle from '../../custom-hooks/useTitle';
 import Products from '../content/Products';
 import Header from '../layout/Header';
-import Error from '../shared/Error';
-import Loading from '../shared/Loading';
 
 const ProductList = () => {
+  useTitle('Product List');
   const navigate = useNavigate();
-  const {
-    loading,
-    products,
-    setProducts,
-    error,
-    setMassDelete,
-    massDelete,
-    VITE_SERVER_ROOT_URL,
-  } = useGlobalContext();
+  const { setProducts, setMassDelete, massDelete, VITE_SERVER_ROOT_URL } =
+    useGlobalContext();
 
   const btn1func = useCallback(() => {
     navigate('/add-product');
     setMassDelete([]);
   }, [navigate]);
-
-  useEffect(() => {
-    useTitle('Product List');
-  }, []);
 
   const btn2func = useCallback(async () => {
     try {
@@ -61,9 +49,7 @@ const ProductList = () => {
         btn2func={btn2func}
         disableBtn2={!massDelete.length}
       />
-      {loading && <Loading />}
-      {error && <Error>{error}</Error>}
-      {products.length && <Products />}
+      <Products />
     </>
   );
 };

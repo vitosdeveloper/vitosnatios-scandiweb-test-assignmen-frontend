@@ -3,7 +3,7 @@ import styles from './Button.module.sass';
 
 type Props = {
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
 };
 

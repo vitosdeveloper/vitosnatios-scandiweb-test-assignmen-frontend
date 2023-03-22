@@ -1,17 +1,16 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useTitle from '../../utils/useTitle';
+import useTitle from '../../custom-hooks/useTitle';
+import AddNewProduct from '../content/AddNewProduct';
 import Header from '../layout/Header';
 
 const AddProduct = () => {
+  useTitle('Product Add');
   const navigate = useNavigate();
   const btn1func = useCallback(() => {}, []);
   //  reset form state when cancelin
   const btn2func = useCallback(() => navigate('/'), []);
 
-  useEffect(() => {
-    useTitle('Product Add');
-  }, []);
   return (
     <>
       <Header
@@ -21,6 +20,7 @@ const AddProduct = () => {
         btn1func={btn1func}
         btn2func={btn2func}
       />
+      <AddNewProduct />
     </>
   );
 };

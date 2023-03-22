@@ -18,7 +18,7 @@ const Product = ({ product, addToRemoveList, removeFromRemoveList }: Props) => {
     } else if (productType === 'book') {
       return 'Weight: ';
     } else if (productType === 'furniture') {
-      return 'Weight: ';
+      return 'Dimensions: ';
     }
   }, [productType]);
 
