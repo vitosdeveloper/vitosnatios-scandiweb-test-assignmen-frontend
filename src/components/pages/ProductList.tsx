@@ -8,8 +8,7 @@ import Header from '../layout/Header';
 const ProductList = () => {
   useTitle('Product List');
   const navigate = useNavigate();
-  const { setProducts, setMassDelete, massDelete, VITE_SERVER_ROOT_URL } =
-    useGlobalContext();
+  const { setProducts, setMassDelete, massDelete } = useGlobalContext();
 
   const btn1func = useCallback(() => {
     navigate('/add-product');
@@ -19,12 +18,9 @@ const ProductList = () => {
   const btn2func = useCallback(async () => {
     try {
       const res = await fetch(
-        VITE_SERVER_ROOT_URL + '/delete/removeProductById.php',
+        import.meta.env.VITE_SERVER_ROOT_URL + '/delete/removeProductById.php',
         {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
+          method: 'POST',
           body: JSON.stringify(massDelete),
         }
       );
@@ -37,7 +33,7 @@ const ProductList = () => {
     } catch (error: any) {
       console.log(error.message);
     }
-  }, [massDelete, VITE_SERVER_ROOT_URL]);
+  }, [massDelete, import.meta.env.VITE_SERVER_ROOT_URL]);
 
   return (
     <>

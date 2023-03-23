@@ -7,8 +7,7 @@ import Header from '../layout/Header';
 
 const AddProduct = () => {
   useTitle('Product Add');
-  const { newProduct, setError, VITE_SERVER_ROOT_URL, getProducts, products } =
-    useGlobalContext();
+  const { newProduct, setError, getProducts, products } = useGlobalContext();
   const navigate = useNavigate();
 
   const btn2func = useCallback(() => navigate('/'), []);
@@ -27,13 +26,10 @@ const AddProduct = () => {
         const skuArr = products.map((product) => product.sku);
         if (!skuArr.includes(sku)) {
           const res = await fetch(
-            VITE_SERVER_ROOT_URL + '/post/postProduct.php',
+            import.meta.env.VITE_SERVER_ROOT_URL + '/post/postProduct.php',
             {
               method: 'POST',
               body: JSON.stringify(newProduct),
-              headers: {
-                'Content-Type': 'application/json; charset=UTF-8',
-              },
             }
           );
           if (res.ok) {
@@ -49,7 +45,7 @@ const AddProduct = () => {
     } else {
       setError('Please, submit required data');
     }
-  }, [newProduct, VITE_SERVER_ROOT_URL, btn2func]);
+  }, [newProduct, import.meta.env.VITE_SERVER_ROOT_URL, btn2func]);
 
   return (
     <>

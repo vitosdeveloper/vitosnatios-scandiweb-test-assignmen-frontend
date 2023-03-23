@@ -15,7 +15,6 @@ const GlobalContext = createContext<{
   setError: Dispatch<SetStateAction<string | null>>;
   massDelete: number[];
   setMassDelete: Dispatch<SetStateAction<number[]>>;
-  VITE_SERVER_ROOT_URL: string;
   newProduct: NewProduct;
   setNewProduct: Dispatch<SetStateAction<NewProduct>>;
   getProducts: () => void;
@@ -26,7 +25,6 @@ const GlobalContext = createContext<{
   setError: () => {},
   massDelete: [],
   setMassDelete: () => {},
-  VITE_SERVER_ROOT_URL: '',
   newProduct: {
     sku: '',
     name: '',
@@ -56,11 +54,14 @@ const GlobalProvider = ({ children }: Props) => {
     attribute: '',
   });
 
-  const { VITE_SERVER_ROOT_URL } = import.meta.env;
-
   const getProducts = async () => {
     try {
-      const res = await fetch(VITE_SERVER_ROOT_URL + '/get/getProducts.php');
+      const res = await fetch(
+        import.meta.env.VITE_SERVER_ROOT_URL + '/get/getProducts.php',
+        {
+          method: 'GET',
+        }
+      );
       const json = await res.json();
       const data = json.map((item: IProduct) => ({
         ...item,
@@ -86,7 +87,6 @@ const GlobalProvider = ({ children }: Props) => {
         setError,
         massDelete,
         setMassDelete,
-        VITE_SERVER_ROOT_URL,
         newProduct,
         setNewProduct,
         getProducts,
