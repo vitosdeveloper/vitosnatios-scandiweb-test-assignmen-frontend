@@ -18,7 +18,7 @@ const ProductList = () => {
   const btn2func = useCallback(async () => {
     try {
       const res = await fetch(
-        import.meta.env.VITE_SERVER_ROOT_URL + '/delete/removeProductById.php',
+        import.meta.env.VITE_SERVER_ROOT_URL + '/post/removeProductById.php',
         {
           method: 'POST',
           body: JSON.stringify(massDelete),
