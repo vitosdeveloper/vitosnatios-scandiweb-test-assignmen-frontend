@@ -2,7 +2,7 @@
 .inputContainer
   width: 280px
   display: flex
-  flex-wrap: wrap
+  flex-direction: row
   justify-content: space-between
   align-items: center
 label
@@ -13,3 +13,9 @@ input
   padding: .3rem
   background: $button-hover
   @extend %border-with-shadow
+
+@media (max-width: 400px)
+  .inputContainer
+    flex-direction: column
+    width: auto
+    gap: .5rem

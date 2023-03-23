@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useGlobalContext } from '../../context/GlobalContext';
 import Product from './Product';
 import styles from './Products.module.sass';

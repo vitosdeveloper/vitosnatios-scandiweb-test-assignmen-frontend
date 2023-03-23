@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useGlobalContext } from '../../context/GlobalContext';
 import useInput from '../../custom-hooks/useInput';
-import Button from '../form/Button';
 import Input from '../form/Input';
 import Selelect from '../form/Selelect';
 import Error from '../shared/Error';

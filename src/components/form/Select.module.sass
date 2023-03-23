@@ -9,3 +9,11 @@ select
   width: 100px
   background: $button-hover
   @extend %border-with-shadow
+
+@media (max-width: 400px)
+  .selectContainer
+    flex-direction: column
+    align-self: center
+    width: auto
+    select
+      width: auto

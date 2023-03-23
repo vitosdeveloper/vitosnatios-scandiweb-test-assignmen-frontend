@@ -1,5 +1,4 @@
-import { memo, useEffect, useRef, useState } from 'react';
-import Error from '../shared/Error';
+import { memo } from 'react';
 import styles from './Input.module.sass';
 
 type Props = {

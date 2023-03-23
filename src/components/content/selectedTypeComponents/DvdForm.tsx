@@ -12,7 +12,6 @@ const DvdForm = ({ setAttributeValues }: Props) => {
   const dvdInput = useInput(0);
 
   useEffect(() => {
-    // if (!dvdInput.value.length || !Number(dvdInput.value)) {
     if (numberValidation(dvdInput)) {
       setAttributeValues('');
     } else setAttributeValues(String(Number(dvdInput.value)) + ' MB');
