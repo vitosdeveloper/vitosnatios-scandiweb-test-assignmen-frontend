@@ -9,13 +9,12 @@ Project made with ReactJS + TSS + SASS
 
 ## install
 
-install: npm i
+install: npm i \
 run: npm run dev
 
-## .env.local
+## add .env.local file to your folder
 
-VITE_SERVER_ROOT_URL=http://localhost/whateverYourApiIs
+`VITE_SERVER_ROOT_URL=http://localhost/whateverYourApiIs`
 
-#### backend repo
-
--
+### backend repo
+https://github.com/vitosnatios/vitosnatios-scandiweb-test-assignmen-backend
