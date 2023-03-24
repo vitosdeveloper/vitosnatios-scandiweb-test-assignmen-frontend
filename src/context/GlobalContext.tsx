@@ -51,7 +51,7 @@ const GlobalProvider = ({ children }: Props) => {
     name: '',
     price: 0,
     productType: '',
-    attribute: '',
+    attribute: [],
   });
 
   const getProducts = async () => {

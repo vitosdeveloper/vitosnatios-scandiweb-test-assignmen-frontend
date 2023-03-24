@@ -5,7 +5,7 @@ import FurnitureForm from './selectedTypeComponents/FurnitureForm';
 
 type Props = {
   selectInput: string;
-  setAttributeValues: Dispatch<SetStateAction<string>>;
+  setAttributeValues: Dispatch<SetStateAction<number[]>>;
 };
 
 const SelectedTypeComponent = ({ selectInput, setAttributeValues }: Props) => {

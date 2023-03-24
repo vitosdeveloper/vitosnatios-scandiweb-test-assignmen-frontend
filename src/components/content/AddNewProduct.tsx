@@ -13,7 +13,7 @@ const AddNewProduct = () => {
   const nameInput = useInput('');
   const priceInput = useInput('');
   const [selectInput, setSelectInput] = useState<string>('dvd');
-  const [attributeValues, setAttributeValues] = useState<string>('');
+  const [attributeValues, setAttributeValues] = useState<number[]>([]);
 
   useEffect(() => {
     setError('');

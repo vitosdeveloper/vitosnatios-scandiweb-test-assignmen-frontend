@@ -4,7 +4,7 @@ export interface IProduct {
   name: string;
   price: number;
   productType: string;
-  attribute: string;
+  attribute: string | number[];
 }
 
 export type NewProduct = Omit<IProduct, 'id'>;

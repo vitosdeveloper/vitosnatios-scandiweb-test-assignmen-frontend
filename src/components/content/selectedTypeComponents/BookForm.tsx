@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import useInput from '../../../custom-hooks/useInput';
-import numberValidation from '../../../utils/NumberInputValue';
+import numberValidation from '../../../utils/numberValidation';
 import ProductAttributeFormContainer from '../../containers/ProductAttributeFormContainer';
 import Input from '../../form/Input';
 
 type Props = {
-  setAttributeValues: Dispatch<SetStateAction<string>>;
+  setAttributeValues: Dispatch<SetStateAction<number[]>>;
 };
 
 const BookForm = ({ setAttributeValues }: Props) => {
@@ -13,8 +13,8 @@ const BookForm = ({ setAttributeValues }: Props) => {
 
   useEffect(() => {
     if (numberValidation(bookInput)) {
-      setAttributeValues('');
-    } else setAttributeValues(String(Number(bookInput.value)) + 'KG');
+      setAttributeValues([]);
+    } else setAttributeValues([Number(bookInput.value)]);
   }, [bookInput.value]);
 
   return (

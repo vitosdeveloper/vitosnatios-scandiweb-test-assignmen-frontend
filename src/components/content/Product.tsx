@@ -10,17 +10,7 @@ type Props = {
 };
 
 const Product = ({ product, addToRemoveList, removeFromRemoveList }: Props) => {
-  const { id, sku, name, price, productType, attribute } = product;
-
-  const measureType = useCallback(() => {
-    if (productType === 'dvd') {
-      return 'Size: ';
-    } else if (productType === 'book') {
-      return 'Weight: ';
-    } else if (productType === 'furniture') {
-      return 'Dimensions: ';
-    }
-  }, [productType]);
+  const { id, sku, name, price, attribute } = product;
 
   const handleCheckboxChange = useCallback(
     ({ target }: any) => {
@@ -45,7 +35,7 @@ const Product = ({ product, addToRemoveList, removeFromRemoveList }: Props) => {
         <p>{sku.toUpperCase()}</p>
         <p>{name}</p>
         <p>{priceFormatter(price)}</p>
-        <p>{measureType() + attribute}</p>
+        <p>{attribute}</p>
       </div>
     </label>
   );
